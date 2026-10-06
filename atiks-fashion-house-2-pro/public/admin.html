@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2eb">
+  <title>Admin Studio — Atik's Fashion House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <section id="loginScreen" class="login-screen">
+    <div class="login-art"><a href="index.html" class="brand">ATIK'S <span>FASHION HOUSE</span></a><div class="login-art-copy"><p class="eyebrow">THE BACKSTAGE</p><h1>Good style.<br><em>Well managed.</em></h1><p>Manage your collection, orders, and storefront from one thoughtful workspace.</p></div><div class="login-art-foot">ADMIN STUDIO · 02.0</div></div>
+    <div class="login-panel"><div class="login-box"><p class="eyebrow">WELCOME BACK</p><h2>Sign in to your<br><em>workspace.</em></h2><p class="login-intro">Use your administrator account to continue.</p>
+      <form id="loginForm"><label for="username">Admin username</label><input id="username" name="username" autocomplete="username" required placeholder="Enter username"><label for="password">Password</label><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Enter password"><button type="button" id="togglePassword" aria-label="Show password">Show</button></div><p class="login-error" id="loginError" aria-live="polite"></p><button class="primary-button full" type="submit">Sign in <span>↗</span></button></form>
+      <div class="login-security"><span>✳</span><p><strong>Protected workspace</strong><br>Demo login: admin / Atik@2026. For production, connect this UI to the server API and use .env credentials.</p></div><a class="back-store" href="index.html">← Back to storefront</a>
+    </div></div>
+  </section>
+
+  <div id="adminApp" class="admin-app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand sidebar-brand" href="index.html">ATIK'S <span>FASHION HOUSE</span></a>
+      <div class="workspace-label">WORKSPACE <span>02</span></div>
+      <nav class="side-nav" aria-label="Admin navigation">
+        <button class="nav-item active" data-view="overview"><span>◫</span> Overview</button>
+        <button class="nav-item" data-view="products"><span>◇</span> Products <b id="navProductCount">0</b></button>
+        <button class="nav-item" data-view="orders"><span>▤</span> Orders <b id="navOrderCount">0</b></button>
+        <button class="nav-item" data-view="content"><span>✳</span> Storefront content</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="admin-avatar">A</div><div class="admin-identity"><strong id="adminName">Administrator</strong><span>Store manager</span></div><button id="logoutButton" class="logout-button" title="Sign out" aria-label="Sign out">↗</button></div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar"><button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle menu">☰</button><div><p class="eyebrow" id="topEyebrow">YOUR STORE AT A GLANCE</p><h1 id="pageTitle">Overview <span>✳</span></h1></div><div class="topbar-right"><a href="index.html" target="_blank" rel="noopener" class="view-store">View storefront ↗</a><div class="top-avatar">A</div></div></header>
+
+      <section class="view active" id="view-overview">
+        <div class="welcome-banner"><div><p class="eyebrow">ATIK'S FASHION HOUSE · ADMIN STUDIO</p><h2>Make good things<br><em>happen today.</em></h2><p>Your store, your standards. Here's what's happening.</p></div><div class="banner-orbit">AFH<span>✳</span></div></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-top"><span>PRODUCTS</span><span class="metric-icon">◇</span></div><strong id="metricProducts">0</strong><p><span class="metric-dot"></span> Active catalogue items</p></article>
+          <article class="metric-card"><div class="metric-top"><span>ORDERS</span><span class="metric-icon">▤</span></div><strong id="metricOrders">0</strong><p>Orders recorded in this demo</p></article>
+          <article class="metric-card"><div class="metric-top"><span>REVENUE</span><span class="metric-icon">৳</span></div><strong id="metricRevenue">৳0</strong><p>From completed sample orders</p></article>
+          <article class="metric-card"><div class="metric-top"><span>LOW STOCK</span><span class="metric-icon">!</span></div><strong id="metricLowStock">0</strong><p>Items at or below 5 units</p></article>
+        </div>
+        <div class="dashboard-grid"><section class="panel"><div class="panel-heading"><div><p class="eyebrow">LATEST ACTIVITY</p><h3>Recent orders</h3></div><button class="plain-link" data-goto="orders">View all →</button></div><div id="recentOrders" class="table-wrap"></div></section>
+          <section class="panel quick-actions"><div class="panel-heading"><div><p class="eyebrow">SHORTCUTS</p><h3>Quick actions</h3></div></div><button class="quick-action" data-goto="products"><span class="quick-symbol">＋</span><span><strong>Add a product</strong><small>Grow your collection</small></span><b>↗</b></button><button class="quick-action" data-goto="content"><span class="quick-symbol">✎</span><span><strong>Edit homepage</strong><small>Refresh your brand story</small></span><b>↗</b></button><button class="quick-action" data-goto="orders"><span class="quick-symbol">▤</span><span><strong>Manage orders</strong><small>Update fulfilment status</small></span><b>↗</b></button><div class="admin-tip"><span>✳</span><p><strong>Store manager tip</strong><br>Keep product names, prices, stock, and imagery accurate before publishing.</p></div></section></div>
+      </section>
+
+      <section class="view" id="view-products"><div class="view-toolbar"><div><p class="eyebrow">YOUR CATALOGUE</p><h2>Products <span id="productsHeadingCount">(0)</span></h2></div><button id="addProductButton" class="primary-button">＋ Add product</button></div><div class="panel"><div class="table-tools"><input id="productSearch" type="search" placeholder="Search products…"><select id="productCategoryFilter" aria-label="Filter by category"><option value="All">All categories</option><option>Clothing</option><option>Outerwear</option><option>Accessories</option></select></div><div id="productsTable" class="table-wrap"></div></div></section>
+
+      <section class="view" id="view-orders"><div class="view-toolbar"><div><p class="eyebrow">CUSTOMER ACTIVITY</p><h2>Orders <span id="ordersHeadingCount">(0)</span></h2></div><button id="exportOrders" class="secondary-button">Export CSV ↓</button></div><div class="panel"><div class="table-tools"><input id="orderSearch" type="search" placeholder="Search order or customer…"><select id="orderStatusFilter" aria-label="Filter orders"><option value="All">All statuses</option><option>Pending</option><option>Processing</option><option>Shipped</option><option>Completed</option><option>Cancelled</option></select></div><div id="ordersTable" class="table-wrap"></div></div><p class="muted-note">This starter project includes sample orders. Real customer orders need a connected checkout and backend.</p></section>
+
+      <section class="view" id="view-content"><div class="view-toolbar"><div><p class="eyebrow">BRAND EXPERIENCE</p><h2>Storefront content</h2></div><span class="saved-pill" id="contentSaved">● Ready to edit</span></div><div class="content-layout"><section class="panel editor-panel"><div class="panel-heading"><div><p class="eyebrow">HOMEPAGE HERO</p><h3>First impressions matter.</h3></div></div><form id="contentForm" class="editor-form"><label>Eyebrow text<input id="contentEyebrow" maxlength="80" required></label><label>Main headline<input id="contentHeadline" maxlength="100" required></label><label>Italic headline line<input id="contentItalic" maxlength="100" required></label><label>Hero description<textarea id="contentDescription" rows="4" maxlength="350" required></textarea></label><label>Primary button label<input id="contentButton" maxlength="45" required></label><label>Hero image URL<input id="contentImage" type="url" placeholder="https://…"></label><div class="form-actions"><button type="submit" class="primary-button">Save homepage content ↗</button><button type="button" id="resetContent" class="secondary-button">Reset demo content</button></div><p class="muted-note">Content is saved in this browser for this demo. In production, save through authenticated server APIs.</p></form></section><section class="preview-panel"><p class="eyebrow">LIVE PREVIEW</p><div class="preview-card"><div class="preview-brand">ATIK'S <span>FASHION HOUSE</span></div><p id="previewEyebrow" class="preview-eyebrow"></p><h3 id="previewHeadline"></h3><h3 id="previewItalic" class="preview-italic"></h3><p id="previewDescription"></p><div id="previewButton" class="preview-button"></div><img id="previewImage" alt="Homepage hero preview" hidden></div><p class="preview-foot">PREVIEW OF YOUR BRAND DIRECTION</p></section></div></section>
+
+      <section class="view" id="view-settings"><div class="view-toolbar"><div><p class="eyebrow">YOUR PREFERENCES</p><h2>Store settings</h2></div></div><div class="settings-grid"><section class="panel"><div class="panel-heading"><div><p class="eyebrow">BUSINESS PROFILE</p><h3>Store information</h3></div></div><form id="settingsForm" class="editor-form"><label>Store name<input id="settingStoreName" required maxlength="100"></label><label>Contact email<input id="settingEmail" type="email" required></label><label>Currency<select id="settingCurrency"><option value="BDT">BDT — Bangladeshi Taka</option><option value="USD">USD — US Dollar</option></select></label><label>Store status<select id="settingStatus"><option value="Open">Open for business</option><option value="Maintenance">Maintenance mode</option></select></label><button class="primary-button" type="submit">Save settings ↗</button><p class="muted-note">These settings affect this demo dashboard only. A live store needs server-side settings and deployment configuration.</p></form></section><section class="panel"><div class="panel-heading"><div><p class="eyebrow">ACCOUNT</p><h3>Admin session</h3></div></div><div class="account-info"><div class="account-row"><span>Signed in as</span><strong id="settingsAdminName">Administrator</strong></div><div class="account-row"><span>Access level</span><strong>Store manager</strong></div><div class="account-row"><span>Session type</span><strong>Local demo session</strong></div></div><div class="security-note"><span>!</span><p><strong>Before going live</strong><br>Use server-side authentication, hashed passwords, secure sessions, HTTPS, database backups, and role-based permissions. Never rely on browser-only login for a real company website.</p></div><button id="settingsLogout" class="secondary-button">Sign out</button></section></div></section>
+
+      <footer class="admin-footer"><span>© <span id="adminYear"></span> ATIK'S FASHION HOUSE</span><span>ADMIN STUDIO 2.0 · DEVELOPED BY MD. Atiqul Islam (Atik)</span><a href="mailto:atik.cmttiu1001@gmail.com">atik.cmttiu1001@gmail.com</a></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="productModal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle"><div class="modal-heading"><div><p class="eyebrow">CATALOGUE EDITOR</p><h2 id="productModalTitle">Add product</h2></div><button class="close-modal" data-close-modal aria-label="Close dialog">×</button></div><form id="productForm" class="editor-form"><input id="editProductId" type="hidden"><label>Product name<input id="editName" required maxlength="100"></label><div class="form-two"><label>Category<select id="editCategory"><option>Clothing</option><option>Outerwear</option><option>Accessories</option></select></label><label>Price (৳)<input id="editPrice" type="number" min="0" step="1" required></label></div><div class="form-two"><label>Colour / variant<input id="editColor" required maxlength="60"></label><label>Stock quantity<input id="editStock" type="number" min="0" step="1" required></label></div><label>Image URL<input id="editImage" type="url" placeholder="https://…"></label><div class="form-actions"><button type="submit" class="primary-button">Save product ↗</button><button type="button" class="secondary-button" data-close-modal>Cancel</button></div></form></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
